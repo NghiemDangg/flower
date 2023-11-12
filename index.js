@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const scheduledTime = new Date("November 12, 2023 19:30:00").getTime();
+  const scheduledTime = new Date("November 12, 2023 23:59:00").getTime();
   const intervalId = setInterval(function () {
     const currentTime = new Date().getTime();
     const linkElement = document.getElementById("route-link");
