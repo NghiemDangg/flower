@@ -35,6 +35,26 @@ body {
   position: relative;
   transform: scale(0.9);
 }
+.description{
+  position: absolute;
+  z-index: 999;
+  top: 30px;
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: #fff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-shadow: 0 0 12px hsl(350, 100%, 88%), 0 0 50px #ffc0cb, 0 0 100px #ffc0cb;
+  animation: fadeIn 3s ease-in;
+}
+
+@keyframes fadeIn{
+  from {
+    opacity: 0; 
+  }
+  to {
+    opacity: 1; 
+  }
+}
 
 .flower {
   position: absolute;

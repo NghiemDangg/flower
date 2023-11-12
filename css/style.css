@@ -17,16 +17,16 @@ body{
 .greetings{
     font-size: 6rem;
     font-weight: 900;
-    
+    margin-bottom: 30px;
 }
 .greetings > span{
-    /* animation: glow 2.5s ease-in-out infinite; */
-    text-shadow: 0 0 12px hsl(350, 100%, 88%), 0 0 50px #ffc0cb, 0 0 100px #ffc0cb;
+    animation: glow 2.5s ease-in-out;
+    text-shadow: 0 0 12px hsl(350, 100%, 88%), 0 0 60px #ffc0cb, 0 0 100px #ffc0cb;
 }
 @keyframes glow{
     0%, 100%{
         color: #fff;
-        text-shadow: 0 0 12px #ffc0cb, 0 0 50px #ffc0cb, 0 0 100px #ffc0cb;
+        text-shadow: 0 0 12px #ffc0cb, 0 0 60px #ffc0cb, 0 0 100px #ffc0cb;
     }
     10%, 90%{
         color: #111;
@@ -48,7 +48,7 @@ body{
 
 .description{
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .button a{
@@ -116,7 +116,7 @@ body{
   }
   
   .front {
-    display: block;
+    display: flex;
     position: relative;
     border-radius: 8px;
     background: hsl(350, 100%, 78%) ;
@@ -159,4 +159,3 @@ body{
   .pushable:focus:not(:focus-visible) {
     outline: none;
   }
-  
