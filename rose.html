@@ -1,0 +1,1356 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-title" content="CodePen" />
+    <link rel="icon" href="img/flowers.png" type="image/x-icon" />
+    <!-- <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script> -->
+    <title>rose</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .hover-animation {
+        animation: hover 1.75s ease-in-out infinite;
+      }
+
+      #castle {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background: radial-gradient(#293c4d, #001920);
+        overflow: hidden;
+      }
+      #castle #table {
+        position: absolute;
+        left: calc(50% - 200px);
+        top: calc(50% - 50px);
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(#a3727e, #af7279, #a16674);
+        border-radius: 100%;
+        border-bottom: 80px solid #623c53;
+        transform: scaleY(0.225);
+      }
+      #castle .shade-wrap {
+        position: absolute;
+        left: calc(50% - 100px);
+        top: calc(52% - 250px);
+        width: 200px;
+        height: 400px;
+      }
+      #castle .shade-wrap #shade-main {
+        position: absolute;
+        left: 20px;
+        top: 100px;
+        width: 160px;
+        height: 300px;
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        border-right: 1px solid rgba(255, 255, 255, 0.6);
+        border-top-left-radius: 50% 30%;
+        border-top-right-radius: 50% 30%;
+        border-bottom: none;
+        transform: perspective(200px) rotateX(8deg) scale(1.075, 1);
+      }
+      #castle .shade-wrap #shade-main #shade-handle-big {
+        position: absolute;
+        left: 55px;
+        top: -14px;
+        width: 50px;
+        height: 30px;
+        border-radius: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.7);
+        transform: scaleY(0.9);
+      }
+      #castle .shade-wrap #shade-main #shade-handle-small {
+        position: absolute;
+        left: 70px;
+        top: -33px;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-bottom: none;
+      }
+      #castle .shade-wrap #shade-main #bottom-shade {
+        position: absolute;
+        bottom: -20px;
+        width: 100%;
+        height: 40px;
+        transform: scaleY(0.5);
+        border-radius: 100%;
+        background: radial-gradient(#d287a5, #da9db6, #985e74);
+        animation: floatAnimate 1.75s ease-in-out infinite;
+      }
+      #castle .shade-wrap #shade-main-reflections {
+        position: relative;
+        left: 20px;
+        top: 100px;
+        width: 160px;
+        height: 300px;
+        border-top-left-radius: 50% 30%;
+        border-top-right-radius: 50% 30%;
+        border-bottom: none;
+        background-color: #6d6179;
+        transform: perspective(200px) rotateX(8deg) scale(1.075, 1);
+        opacity: 0.15;
+      }
+      #castle .shade-wrap #shade-main-reflections:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-top-right-radius: 50% 30%;
+        border-right: 20px solid rgba(255, 255, 255, 0.5);
+        transform: scale(0.7, 0.85);
+        filter: blur(5px);
+      }
+      #castle .shade-wrap #shade-main-reflections:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 50% 30%;
+        border-left: 8px solid rgba(255, 255, 255, 0.6);
+        transform: scale(0.85, 0.85);
+        filter: blur(5px);
+      }
+      #castle .shade-wrap #flower-wrap {
+        position: relative;
+        top: -50px;
+      }
+      #castle .shade-wrap #flower-wrap #stem {
+        position: absolute;
+        left: 82px;
+        top: 187px;
+        width: 100px;
+        height: 150px;
+        background-color: transparent;
+        border: solid 4px #a1b965;
+        border-color: transparent transparent transparent #a1b965;
+        border-radius: 50%/120px 100px 0 0;
+        transform: rotate(-3deg) scale(1.1, 0.9);
+      }
+      #castle .shade-wrap #flower-wrap #petal1 {
+        position: absolute;
+        left: 97px;
+        top: 188px;
+        width: 25px;
+        height: 25px;
+        border-top-left-radius: 50% 10%;
+        border-top-right-radius: 50% 10%;
+        border-bottom-left-radius: 50% 40%;
+        border-bottom-right-radius: 50% 40%;
+        background-color: #c82b60;
+        box-shadow: 1px -1px 1px 0 #6f1232;
+        transform: rotate(32deg) scale(1.6, 1.6);
+      }
+      #castle .shade-wrap #flower-wrap #petal1:before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-top-left-radius: 50% 10%;
+        border-top-right-radius: 50% 10%;
+        border-bottom-left-radius: 50% 40%;
+        border-bottom-right-radius: 50% 40%;
+        background-color: transparent;
+        box-shadow: 0 0 10px 0 #e8b2ca;
+        opacity: 0.9;
+      }
+      #castle .shade-wrap #flower-wrap #petal1:after {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-top-left-radius: 50% 10%;
+        border-top-right-radius: 50% 10%;
+        border-bottom-left-radius: 50% 40%;
+        border-bottom-right-radius: 50% 40%;
+        background-color: transparent;
+        box-shadow: 0 0 35px 0 #e8b2ca;
+        animation: glow 3s ease-in-out infinite;
+      }
+      #castle .shade-wrap #flower-wrap #petal2 {
+        position: absolute;
+        left: 85px;
+        top: 185px;
+        width: 25px;
+        height: 30px;
+        border-top-left-radius: 50% 10%;
+        border-top-right-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+        border-bottom-right-radius: 50% 10%;
+        background-color: #d05478;
+        transform: rotate(35deg) scale(1.2, 1);
+        box-shadow: 1px -1px 1px 0 #6f1232;
+        opacity: 0.9;
+      }
+      #castle .shade-wrap #flower-wrap #petal3 {
+        position: absolute;
+        left: 105px;
+        top: 197px;
+        width: 25px;
+        height: 28px;
+        border-top-left-radius: 50% 50%;
+        border-top-right-radius: 10% 10%;
+        border-bottom-left-radius: 10% 10%;
+        border-bottom-right-radius: 50% 50%;
+        background-color: #cb5275;
+        transform: rotate(25deg) scale(1, 1.05) skew(-8deg);
+        box-shadow: 1px -1px 1px 0 #6f1232;
+        opacity: 0.9;
+      }
+      #castle .shade-wrap #flower-wrap #petal4 {
+        position: absolute;
+        left: 80px;
+        top: 191px;
+        width: 25px;
+        height: 25px;
+        border-top-left-radius: 50% 10%;
+        border-top-right-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+        border-bottom-right-radius: 50% 10%;
+        background-color: #d26484;
+        transform: rotate(30deg) scale(1.1, 0.9) skew(10deg);
+        box-shadow: 1px -1px 1px 0 #a53d60;
+        opacity: 0.9;
+      }
+      #castle .shade-wrap #flower-wrap #petal5 {
+        position: absolute;
+        left: 105px;
+        top: 207px;
+        width: 25px;
+        height: 20px;
+        border-top-left-radius: 50% 50%;
+        border-top-right-radius: 10% 10%;
+        border-bottom-left-radius: 10% 10%;
+        border-bottom-right-radius: 50% 50%;
+        background-color: #d26484;
+        transform: rotate(28deg) scale(1, 1.05) skew(-18deg);
+        box-shadow: 1px -1px 1px 0 #a53d60;
+        opacity: 0.9;
+      }
+      #castle .shade-wrap #flower-wrap #falling-petal {
+        position: absolute;
+        left: 105px;
+        top: 209px;
+        width: 22px;
+        height: 18px;
+        border-top-left-radius: 50% 50%;
+        border-top-right-radius: 10% 10%;
+        border-bottom-left-radius: 10% 10%;
+        border-bottom-right-radius: 50% 50%;
+        background-color: #da7290;
+        transform: rotate(32deg) scale(0.9, 0.95) skew(-18deg);
+        box-shadow: 1px -1px 1px 0 #a53d60;
+        opacity: 0.9;
+        animation: 7s fall 4s ease-in-out infinite;
+      }
+      #castle .shade-wrap #flower-wrap #leaf1 {
+        position: absolute;
+        left: 75px;
+        top: 225px;
+        width: 13px;
+        height: 20px;
+        border-top-left-radius: 50% 10%;
+        border-top-right-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+        border-bottom-right-radius: 50% 10%;
+        background-color: #a1b965;
+        transform: rotate(5deg);
+      }
+      #castle .shade-wrap #flower-wrap #leaf2 {
+        position: absolute;
+        left: 82px;
+        top: 265px;
+        width: 12px;
+        height: 16px;
+        border-top-left-radius: 50% 10%;
+        border-top-right-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+        border-bottom-right-radius: 50% 10%;
+        background-color: #a1b965;
+        transform: rotate(-97deg);
+      }
+
+      .dustDef {
+        position: absolute;
+        background-color: white;
+        border-radius: 100%;
+        box-shadow: 0 0 3px 1px white;
+        opacity: 0;
+      }
+
+      @keyframes hover {
+        0% {
+          margin-top: 60px;
+        }
+        50% {
+          margin-top: 50px;
+        }
+        100% {
+          margin-top: 60px;
+        }
+      }
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 25px 0 #e8b2ca;
+        }
+        50% {
+          box-shadow: 0 0 45px 0 #e8b2ca;
+        }
+        100% {
+          box-shadow: 0 0 25px 0 #e8b2ca;
+        }
+      }
+      @keyframes fall {
+        5% {
+          top: 209px;
+          left: 105px;
+          transform: rotate(55deg) scale(0.9, 0.95) skew(-18deg);
+          opacity: 0.9;
+        }
+        30% {
+          left: 90px;
+        }
+        55% {
+          left: 130px;
+        }
+        60%,
+        100% {
+          top: 380px;
+          transform: rotate(30deg) scale(0.9, 0.95) skew(-32deg);
+          opacity: 0;
+        }
+      }
+      @keyframes floatAnimate {
+        0% {
+          background-size: 105% 120%;
+          background-position: 0 0;
+          opacity: 0.7;
+        }
+        50% {
+          background-size: 100% 100%;
+          background-position: 0 0;
+          opacity: 0.5;
+        }
+        100% {
+          background-size: 105% 120%;
+          background-position: 0 0;
+          opacity: 0.7;
+        }
+      }
+    </style>
+
+    <script>
+      window.console = window.console || function (t) {};
+    </script>
+
+    <style>
+      @keyframes blink1 {
+        0% {
+          top: 150px;
+          left: 130px;
+          width: 0.3px;
+          height: 0.3px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 0.6px;
+          height: 0.6px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.3px;
+          height: 0.3px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 0.44999999999999996px;
+          height: 0.44999999999999996px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.15px;
+          height: 0.15px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 152px;
+          left: 132px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink2 {
+        0% {
+          top: 300px;
+          left: 65px;
+          width: 1px;
+          height: 1px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 2px;
+          height: 2px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 1px;
+          height: 1px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.5px;
+          height: 1.5px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 299px;
+          left: 63px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink3 {
+        0% {
+          top: 150px;
+          left: 70px;
+          width: 0.9px;
+          height: 0.9px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1.8px;
+          height: 1.8px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.9px;
+          height: 0.9px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.35px;
+          height: 1.35px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.45px;
+          height: 0.45px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 150px;
+          left: 70px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink4 {
+        0% {
+          top: 160px;
+          left: 75px;
+          width: 1.2px;
+          height: 1.2px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 2.4px;
+          height: 2.4px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 1.2px;
+          height: 1.2px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.7999999999999998px;
+          height: 1.7999999999999998px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.6px;
+          height: 0.6px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 170px;
+          left: 78px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink5 {
+        0% {
+          top: 160px;
+          left: 80px;
+          width: 1.2px;
+          height: 1.2px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 2.4px;
+          height: 2.4px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 1.2px;
+          height: 1.2px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.7999999999999998px;
+          height: 1.7999999999999998px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.6px;
+          height: 0.6px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 180px;
+          left: 82px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink6 {
+        0% {
+          top: 160px;
+          left: 85px;
+          width: 1px;
+          height: 1px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 2px;
+          height: 2px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 1px;
+          height: 1px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.5px;
+          height: 1.5px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 170px;
+          left: 100px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink7 {
+        0% {
+          top: 170px;
+          left: 125px;
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1px;
+          height: 1px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 0.75px;
+          height: 0.75px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.25px;
+          height: 0.25px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 180px;
+          left: 110px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink8 {
+        0% {
+          top: 115px;
+          left: 90px;
+          width: 0.8px;
+          height: 0.8px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1.6px;
+          height: 1.6px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.8px;
+          height: 0.8px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.2000000000000002px;
+          height: 1.2000000000000002px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.4px;
+          height: 0.4px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 115px;
+          left: 90px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink9 {
+        0% {
+          top: 200px;
+          left: 93px;
+          width: 0.8px;
+          height: 0.8px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1.6px;
+          height: 1.6px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.8px;
+          height: 0.8px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.2000000000000002px;
+          height: 1.2000000000000002px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.4px;
+          height: 0.4px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 200px;
+          left: 95px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink10 {
+        0% {
+          top: 145px;
+          left: 100px;
+          width: 0.9px;
+          height: 0.9px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1.8px;
+          height: 1.8px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.9px;
+          height: 0.9px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.35px;
+          height: 1.35px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.45px;
+          height: 0.45px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 155px;
+          left: 100px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink11 {
+        0% {
+          top: 170px;
+          left: 100px;
+          width: 0.7px;
+          height: 0.7px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1.4px;
+          height: 1.4px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.7px;
+          height: 0.7px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.0499999999999998px;
+          height: 1.0499999999999998px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.35px;
+          height: 0.35px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 230px;
+          left: 90px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink12 {
+        0% {
+          top: 115px;
+          left: 100px;
+          width: 0.7px;
+          height: 0.7px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1.4px;
+          height: 1.4px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.7px;
+          height: 0.7px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.0499999999999998px;
+          height: 1.0499999999999998px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.35px;
+          height: 0.35px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 112px;
+          left: 102px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink13 {
+        0% {
+          top: 170px;
+          left: 100px;
+          width: 1.1px;
+          height: 1.1px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 2.2px;
+          height: 2.2px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 1.1px;
+          height: 1.1px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.6500000000000001px;
+          height: 1.6500000000000001px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.55px;
+          height: 0.55px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 200px;
+          left: 95px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink14 {
+        0% {
+          top: 150px;
+          left: 100px;
+          width: 1.4px;
+          height: 1.4px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 2.8px;
+          height: 2.8px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 1.4px;
+          height: 1.4px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 2.0999999999999996px;
+          height: 2.0999999999999996px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.7px;
+          height: 0.7px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 190px;
+          left: 97px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink15 {
+        0% {
+          top: 160px;
+          left: 105px;
+          width: 1px;
+          height: 1px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 2px;
+          height: 2px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 1px;
+          height: 1px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.5px;
+          height: 1.5px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 180px;
+          left: 100px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink16 {
+        0% {
+          top: 180px;
+          left: 125px;
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1px;
+          height: 1px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 0.75px;
+          height: 0.75px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.25px;
+          height: 0.25px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 190px;
+          left: 125px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink17 {
+        0% {
+          top: 135px;
+          left: 130px;
+          width: 0.9px;
+          height: 0.9px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1.8px;
+          height: 1.8px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.9px;
+          height: 0.9px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 1.35px;
+          height: 1.35px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.45px;
+          height: 0.45px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 135px;
+          left: 130px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink18 {
+        0% {
+          top: 170px;
+          left: 135px;
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 1px;
+          height: 1px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.5px;
+          height: 0.5px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 0.75px;
+          height: 0.75px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.25px;
+          height: 0.25px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 190px;
+          left: 132px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+    <style>
+      @keyframes blink19 {
+        0% {
+          top: 320px;
+          left: 135px;
+          width: 0.4px;
+          height: 0.4px;
+          opacity: 0.4;
+        }
+        20% {
+          width: 0.8px;
+          height: 0.8px;
+          opacity: 0.8;
+        }
+        35% {
+          width: 0.4px;
+          height: 0.4px;
+          opacity: 0.5;
+        }
+        55% {
+          width: 0.6000000000000001px;
+          height: 0.6000000000000001px;
+          opacity: 0.7;
+        }
+        80% {
+          width: 0.2px;
+          height: 0.2px;
+          opacity: 0.3;
+        }
+        100% {
+          top: 315px;
+          left: 132px;
+          width: 0px;
+          height: 0px;
+          opacity: 0.1;
+        }
+      }
+    </style>
+  </head>
+
+  <body translate="no">
+    <div id="castle">
+      <div id="table"></div>
+      <div class="shade-wrap hover-animation" id="main">
+        <div id="flower-wrap">
+          <div id="stem"></div>
+          <div id="petal1"></div>
+          <div id="petal2"></div>
+          <div id="petal3"></div>
+          <div id="petal4"></div>
+          <div id="petal5"></div>
+          <div id="falling-petal"></div>
+          <div id="leaf1"></div>
+          <div id="leaf2"></div>
+        </div>
+        <span
+          class="dustDef"
+          style="
+            animation: blink3 2s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.5s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink4 2s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              1s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink5 1s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.4s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink6 2s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.5s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink7 3s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              1.5s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink8 2s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              2s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink9 3s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              1.5s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink10 1s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.5s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink11 2s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.75s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink12 3s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.25s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink13 1.5s cubic-bezier(0.71, 0.11, 0.68, 0.83)
+              infinite 0.75s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink14 2s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              1.5s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink15 1.5s cubic-bezier(0.71, 0.11, 0.68, 0.83)
+              infinite 0.725s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink16 1s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.725s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink17 3s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              1.5s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink18 2.5s cubic-bezier(0.71, 0.11, 0.68, 0.83)
+              infinite 0.75s;
+          "
+        ></span>
+      </div>
+      <div class="shade-wrap" id="sub">
+        <div id="shade-main-reflections"></div>
+        <div id="shade-main">
+          <div id="shade-handle-big"></div>
+          <div id="shade-handle-small"></div>
+          <div id="top-reflection"></div>
+          <div id="bottom-shade"></div>
+        </div>
+        <span
+          class="dustDef"
+          style="
+            animation: blink1 2.5s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.1s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink2 2s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.2s;
+          "
+        ></span
+        ><span
+          class="dustDef"
+          style="
+            animation: blink19 5s cubic-bezier(0.71, 0.11, 0.68, 0.83) infinite
+              0.3s;
+          "
+        ></span>
+      </div>
+    </div>
+
+    <script id="rendered-js">
+      (() => {
+        const head = document.getElementsByTagName("head")[0];
+        let animationId = 1;
+
+        function CreateMagicDust(
+          x1,
+          x2,
+          y1,
+          y2,
+          sizeRatio,
+          fallingTime,
+          animationDelay,
+          node = "main"
+        ) {
+          let dust = document.createElement("span");
+          let animation = document.createElement("style");
+          animation.innerHTML =
+            "\
+          @keyframes blink" +
+            animationId +
+            "{\
+              0% {\
+                  top: " +
+            y1 +
+            "px;\
+                  left: " +
+            x1 +
+            "px;\
+                  width: " +
+            2 * sizeRatio +
+            "px;\
+                  height: " +
+            2 * sizeRatio +
+            "px;\
+                  opacity: .4\
+              }\
+              20% {\
+                  width: " +
+            4 * sizeRatio +
+            "px;\
+                  height: " +
+            4 * sizeRatio +
+            "px;\
+                  opacity: .8\
+              }\
+              35% {\
+                  width: " +
+            2 * sizeRatio +
+            "px;\
+                  height: " +
+            2 * sizeRatio +
+            "px;\
+                  opacity: .5\
+              }\
+              55% {\
+                  width: " +
+            3 * sizeRatio +
+            "px;\
+                  height: " +
+            3 * sizeRatio +
+            "px;\
+                  opacity: .7\
+              }\
+              80% {\
+                  width: " +
+            sizeRatio +
+            "px;\
+                  height: " +
+            sizeRatio +
+            "px;\
+                  opacity: .3\
+              }\
+              100% {\
+                  top: " +
+            y2 +
+            "px;\
+                  left: " +
+            x2 +
+            "px;\
+                  width: " +
+            0 +
+            "px;\
+                  height: " +
+            0 +
+            "px;\
+                  opacity: .1\
+              }}";
+          head.appendChild(animation);
+          dust.classList.add("dustDef");
+          dust.setAttribute(
+            "style",
+            `animation: blink${animationId++} ${fallingTime}s cubic-bezier(.71, .11, .68, .83) infinite ${animationDelay}s`
+          );
+          document.getElementById(node).appendChild(dust);
+        }
+        [
+          [130, 132, 150, 152, 0.15, 2.5, 0.1, "sub"],
+          [65, 63, 300, 299, 0.5, 2, 0.2, "sub"],
+          [70, 70, 150, 150, 0.45, 2, 0.5],
+          [75, 78, 160, 170, 0.6, 2, 1],
+          [80, 82, 160, 180, 0.6, 1, 0.4],
+          [85, 100, 160, 170, 0.5, 2, 0.5],
+          [125, 110, 170, 180, 0.25, 3, 1.5],
+          [90, 90, 115, 115, 0.4, 2, 2],
+          [93, 95, 200, 200, 0.4, 3, 1.5],
+          [100, 100, 145, 155, 0.45, 1, 0.5],
+          [100, 90, 170, 230, 0.35, 2, 0.75],
+          [100, 102, 115, 112, 0.35, 3, 0.25],
+          [100, 95, 170, 200, 0.55, 1.5, 0.75],
+          [100, 97, 150, 190, 0.7, 2, 1.5],
+          [105, 100, 160, 180, 0.5, 1.5, 0.725],
+          [125, 125, 180, 190, 0.25, 1, 0.725],
+          [130, 130, 135, 135, 0.45, 3, 1.5],
+          [135, 132, 170, 190, 0.25, 2.5, 0.75],
+          [135, 132, 320, 315, 0.2, 5, 0.3, "sub"],
+        ].forEach((o) => CreateMagicDust(...o));
+      })();
+    </script>
+  </body>
+</html>
